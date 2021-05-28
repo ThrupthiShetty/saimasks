@@ -1,22 +1,18 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-icon-button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <h1>Saimasks </h1>
-    <span class="menu-spacer"></span>
+    <span><h1>Saimasks </h1></span>
+    <span class="example-spacer"></span>
     <div>
       <a mat-button [routerLink]="'/'"> Dashboard </a>
       <a mat-button [routerLink]="'/home'"> New Request </a>
       <a mat-button [routerLink]="'/requests'"> All Requests </a>
       <a mat-button [routerLink]="'/create-contact'">  Contact Us </a>
 
-    </div>
+    </div>     
   </mat-toolbar-row>
-
-  <!-- <mat-toolbar-row>
-      <span style="font-size: 12px;">SimpleCRM helps you easily manage your contacts</span>
-    </mat-toolbar-row> -->
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav>

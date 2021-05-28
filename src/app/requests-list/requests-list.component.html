@@ -1,1 +1,16 @@
-<p>requests-list works!</p>
+<div *ngIf="requests.length > 0" style="padding: 10px;">
+    <mat-list>
+        <div mat-subheader>Requests</div>
+        <mat-list-item *ngFor="let request of requests">
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <div mat-line>{{request.name}}</div>
+          <div mat-line> {{request.address}} </div>
+          <div mat-line> {{request.city}} </div>
+          <div mat-line> {{request.state}} </div>
+          <div style="width: 10vw;"> {{request.samithi}} </div>
+          <div > {{request.quantity}} </div>
+
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+</div>

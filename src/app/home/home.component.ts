@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
-import * as states from '../../resources/states.json';
+import * as states from '../resources/states.json';
+import { SaimaskService } from '../services/saimask.service';
 
 interface State {
   key: string;
@@ -17,10 +18,9 @@ export class HomeComponent implements OnInit {
   registerForm: FormGroup;
   states: State[];
   state: any;
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder, private saimaskService: SaimaskService) { 
     this.title = 'Angular Form Validation Tutorial';
     this.states =  (states as any).default;
-    console.log(this.states)
 
   }
 
@@ -43,6 +43,9 @@ export class HomeComponent implements OnInit {
       console.log("invalid")
       return;
     }
+    this.saimaskService.createNewRequest(this.registerForm.value).subscribe((newRequest) => {
+      console.log(newRequest)
+    })
     console.log(this.registerForm.value);
   }
 

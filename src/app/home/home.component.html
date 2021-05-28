@@ -1,66 +1,81 @@
 <div style="text-align:center">
-    <h1>
-      Craete New request
-    </h1>
-    <div class="example-container">
-      <div class="form-container">
-        <form [formGroup]="registerForm" (submit)="submit()">
+  <h1>
+    Craete New request
+  </h1>
+  <div class="example-container">
+    <div class="form-container">
+      <form [formGroup]="registerForm" (submit)="submit()">
+        <div class="flex-container">
+          <mat-label> Full Name
+          </mat-label>
           <mat-form-field class="form-field" appearance="fill">
-            <mat-label> Full Name
-            </mat-label>
             <input matInput formControlName="fullName" required>
             <mat-error *ngIf="registerForm.controls.fullName.touched && registerForm.controls.fullName.invalid">
               <span *ngIf="registerForm.controls.fullName.errors.required">This field is mandatory.</span>
               <span *ngIf="registerForm.controls.fullName.errors.pattern">This field is invalid.</span>
             </mat-error>
           </mat-form-field>
+          <mat-label> Sai Samithi
+          </mat-label>
           <mat-form-field class="form-field" appearance="fill">
-            <mat-label> Sai Samithi
-            </mat-label>
             <input matInput formControlName="saiSamithi" required>
           </mat-form-field>
+        </div>
+        <div class="flex-container">
+          <mat-label> State
+          </mat-label>
           <mat-form-field class="form-field" appearance="fill">
-            <mat-label> State
-            </mat-label>
             <mat-select formControlName="state" required>
-              <mat-option *ngFor="let state of states"  [(value)]="state">
+              <mat-option *ngFor="let state of states" [(value)]="state">
                 {{state.name}}
               </mat-option>
-              </mat-select>
+            </mat-select>
           </mat-form-field>
+          <mat-label> City
+          </mat-label>
           <mat-form-field class="form-field" appearance="fill">
-            <mat-label> City
-            </mat-label>
             <input matInput formControlName="city" required>
           </mat-form-field>
+        </div>
+        <div class="flex-container">
+          <mat-label> Pincode
+          </mat-label>
           <mat-form-field class="form-field" appearance="fill">
-            <mat-label> Pincode
-            </mat-label>
-            <input matInput formControlName="pinCode" type="number" >
+            <input matInput formControlName="pinCode" type="number">
           </mat-form-field>
+          <mat-label> Phone number
+          </mat-label>
           <mat-form-field class="form-field" appearance="fill">
-            <mat-label> Phone number
-            </mat-label>
             <input matInput formControlName="phoneNumber" type="number">
           </mat-form-field>
+        </div>
+        <div class="flex-container">
+          <mat-label> Address
+          </mat-label>
           <mat-form-field class="form-field" appearance="fill">
-            <mat-label> Address
-            </mat-label>
-            <textarea matInput formControlName="address" ></textarea>
+            <textarea matInput formControlName="address"></textarea>
           </mat-form-field>
+          <mat-label> Organization Name
+          </mat-label>
           <mat-form-field class="form-field" appearance="fill">
-            <mat-label> Organization Name
-            </mat-label>
-            <input matInput formControlName="orgName" >
+            <input matInput formControlName="orgName">
           </mat-form-field>
+        </div>
+        <div class="flex-container">
+          <mat-label> Quantity
+          </mat-label>
           <mat-form-field class="form-field" appearance="fill">
-            <mat-label> Quantity
-            </mat-label>
             <input matInput formControlName="quantity" type="number" required>
           </mat-form-field>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
+          <mat-label></mat-label>
+          <div></div>
+        </div>
 
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </form>
+
+
+    </div>
   </div>
+
+</div>

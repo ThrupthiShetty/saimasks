@@ -1,13 +1,54 @@
-.example-container{
-    text-align: center
-}
 
 .form-container{
-    width: 400px; 
-    margin: 0px auto; 
-    margin-top: 50px
+    margin: 10px 20px;
+    padding: 10vh 5vh 2vh 0;
+    background:rgb(231, 231, 231);
+    border-radius: 5px;
 }
 
 .form-field{
-    display: block
+    display: block;
+    width: 300px;
+}
+
+.flex-container {
+  /* We first create a flex layout context */
+  display: flex;
+  
+  /* Then we define the flow direction 
+     and if we allow the items to wrap 
+   * Remember this is the same as:
+   * flex-direction: row;
+   * flex-wrap: wrap;
+   */
+  flex-flow: row wrap;
+  
+  /* Then we define how is distributed the remaining space */
+  justify-content: space-around;
+  
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.flex-container > * {
+    flex: 1 0 auto;
+    flex-basis: 0;
+}
+
+.flex-container > mat-label {
+    flex: 0 0 13%;
+}
+
+.flex-item {
+  background: tomato;
+  padding: 5px;
+  width: 200px;
+  height: 150px;
+  margin-top: 10px;
+  line-height: 150px;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
 }
