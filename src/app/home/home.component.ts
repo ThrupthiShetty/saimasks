@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       fullName: [null, [Validators.required]],
       saiSamithi: [null, [Validators.required]],
-      state: [this.state, [Validators.required]],
+      state: [null, [Validators.required]],
       city: [null, [Validators.required]],
       pinCode: [null],
       phoneNumber: [null, Validators.required],
@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
     this.saimaskService.createNewRequest(this.registerForm.value).subscribe((newRequest) => {
       console.log(newRequest)
     })
+    console.log(this.registerForm.value);
     console.log(this.registerForm.value);
   }
 
