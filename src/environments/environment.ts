@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  urlAddress: 'https://60af2d095b8c300017debd96.mockapi.io',
+  maskRequestEP : 'https://us-central1-saimasks.cloudfunctions.net'
 };
 
 /*
