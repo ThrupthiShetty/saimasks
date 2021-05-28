@@ -28,7 +28,7 @@ type Request = {
 
 const addEntry = async (req: Request, res: Response) => {
 
-    console.log(`addEntry request is `,JSON.stringify(req));
+    console.log(`addEntry request is `,JSON.stringify(req.body));
     const { name, email, phone, samithi, address, city, state, postalcode, quantity } = req.body;
     try {
         const newMaskRequest = db.collection("maskrequests").doc();

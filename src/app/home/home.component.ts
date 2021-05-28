@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     private maskRequestService: MasksRequetsService) {
     this.title = 'Angular Form Validation Tutorial';
     this.states = (states as any).default;
-    console.log(this.states)
+   // console.log(this.states)
 
   }
 
@@ -66,17 +66,18 @@ export class HomeComponent implements OnInit {
         "name": this.registerForm.value.fullName,
        
         "email": this.registerForm.value.city,
-        "phone": this.registerForm.value.phone,
+        "phone": this.registerForm.value.phoneNumber || 1213121,
         "samithi": this.registerForm.value.saiSamithi,
         "address": this.registerForm.value.address,
         "city": this.registerForm.value.city,
         "state":this.registerForm.value.state.name,
         "postalcode":this.registerForm.value.pinCode,
-        "quantity":this.registerForm.value.quantity
+        "quantity":this.registerForm.value.quantity,
+       
     }
 
     console.log(newMaskRequestBody);
-      this.maskRequestService.create('maskrequests', {})
+      this.maskRequestService.create('maskrequests', newMaskRequestBody)
         .subscribe(res => {
           // this.dataSource.data = res as MaskRequest[];
 

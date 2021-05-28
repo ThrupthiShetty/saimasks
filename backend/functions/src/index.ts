@@ -6,7 +6,13 @@ import { addEntry, deleteEntry, getAllEntries, updateEntry } from "./controllers
 const app = express();
 
 
-app.use(cors());
+//app.use(cors());
+
+const corsHandler = cors({origin: true});
+
+app.use(corsHandler);
+
+app.use(express.json());
 
 let demoLogger = (req: any, res: any, next: any) => {
     let current_datetime = new Date();
@@ -29,9 +35,9 @@ let demoLogger = (req: any, res: any, next: any) => {
     console.log(log);
     next();
 };
-//app.use(demoLogger);
+app.use(demoLogger);
 app.get("/", (req, res) => res.status(200).send("Hey there!..I am up for sure :)"));
-app.post("/maskrequests",demoLogger, addEntry);
+app.post("/maskrequests", addEntry);
 app.get('/maskrequests', getAllEntries)
 app.patch('/maskrequests/:entryId', updateEntry)
 app.delete('/maskrequests/:entryId', deleteEntry)

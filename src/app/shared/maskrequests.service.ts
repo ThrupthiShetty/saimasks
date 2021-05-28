@@ -10,7 +10,8 @@ export class MasksRequetsService {
   constructor(private http: HttpClient) { }
  
   public getData = (route: string) => {
-    return this.http.get(this.createCompleteRoute("/api/v1/"+route, environment.urlAddress));
+   // return this.http.get(this.createCompleteRoute("/api/v1/"+route, environment.urlAddress));
+   return this.http.get(this.createCompleteRoute("/maskapp/"+route, environment.maskRequestEP));
   }
  
   public create = (route: string, body) => {
