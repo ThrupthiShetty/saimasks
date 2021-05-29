@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as states from '../../resources/states.json';
+import * as states from '../resources/states.json';
 import { MasksRequetsService } from '../shared/maskrequests.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface State {
   key: string;
@@ -19,8 +21,11 @@ export class HomeComponent implements OnInit {
   states: State[];
   state: any;
   submitted: boolean = false;
+  showProgress: boolean = false;
   constructor(private formBuilder: FormBuilder,
-    private maskRequestService: MasksRequetsService) {
+    private maskRequestService: MasksRequetsService,
+    private router: Router,
+    private _snackBar: MatSnackBar) {
     this.title = 'Angular Form Validation Tutorial';
     this.states = (states as any).default;
     // console.log(this.states)
@@ -50,26 +55,9 @@ export class HomeComponent implements OnInit {
       console.log("invalid")
       return;
     } else {
-
-
-
-      //       address: "1234 address"
-      // city: "hyderbad"
-      // fullName: "sairam"
-      // orgName: "ngo"
-      // phoneNumber: 324324
-      // pinCode: 342423
-      // quantity: 100
-      // saiSamithi: "hyderbad"
-      // state:
-      // key: "AP"
-      // name: "Andhra Pradesh"
-
-
+      this.showProgress = true;
       const newMaskRequestBody = {
-
         "name": this.registerForm.value.fullName,
-
         "email": this.registerForm.value.city,
         "phone": this.registerForm.value.phoneNumber || 1213121,
         "samithi": this.registerForm.value.saiSamithi,
@@ -78,18 +66,18 @@ export class HomeComponent implements OnInit {
         "state": this.registerForm.value.state.name,
         "postalcode": this.registerForm.value.pinCode,
         "quantity": this.registerForm.value.quantity,
-
       }
-
       console.log(newMaskRequestBody);
       this.maskRequestService.create('maskrequests', newMaskRequestBody)
         .subscribe(res => {
           // this.dataSource.data = res as MaskRequest[];
-
-
           console.log("new request stored in the db.", res);
+          this._snackBar.open("Your request has been successfully submitted", "Success");
+          this.router.navigate(['/requests'])
+
         })
       this.submitted = true;
+      this.showProgress = false;
     }
 
   }
