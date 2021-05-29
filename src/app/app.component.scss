@@ -9,3 +9,12 @@
 ::ng-deep mat-sidenav-content {
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .toolbar-container {
+        display: none;
+    }
+}
