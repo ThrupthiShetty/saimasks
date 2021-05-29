@@ -3,10 +3,19 @@
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <span><h1>Saimasks </h1></span>
+    <div id="header" >
+      <div class="container d-flex align-items-center justify-content-between">
+  
+        <h2 class="logo">
+          Saimasks
+          <!-- <sup style="vertical-align:bottom; font-size: 10px;">sairam</sup> -->
+        
+        </h2>
+      </div>
+  </div>
     <span class="example-spacer"></span>
     <div>
-      <a mat-button [routerLink]="'/'"> Dashboard </a>
+      <a mat-button [routerLink]="'/dashboard'"> Dashboard </a>
       <a mat-button [routerLink]="'/home'"> New Request </a>
       <a mat-button [routerLink]="'/requests'"> All Requests </a>
       <a mat-button [routerLink]="'/create-contact'">  Contact Us </a>
@@ -19,6 +28,7 @@
     <mat-nav-list>
 
       <a mat-list-item [routerLink]="'/'"> Home </a>
+      <a mat-list-item [routerLink]="'/dashboard'"> Dashboard  </a>
       <a mat-list-item [routerLink]="'/home'"> New Request  </a>
       <a mat-list-item [routerLink]="'/requests'"> All Requests </a>
       <a mat-list-item [routerLink]="'/create-contact'"> Contact Us </a>
@@ -30,14 +40,53 @@
     <div style="height: 88vh;">
 
       <router-outlet></router-outlet>
-      <footer class="page-footer font-small blue">
+      <footer id="footer">
 
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2021 Copyright:
-          <!-- <a href="https://mdbootstrap.com/"> MDBootstrap.com</a> -->
+        <div class="footer-top">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-3 col-md-6 footer-links">
+                <h4>Useful Links</h4>
+                <ul>
+                  <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                  <!-- <li><i class="bx bx-chevron-right"></i> <a href="#services">Services</a></li> -->
+                  <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                </ul>
+              </div>
+    
+              <div class="col-lg-3 col-md-6 footer-contact">
+                <h4>Contact Us</h4>
+                <!-- <p>
+                  Saimasks<br>
+                  USA<br><br>
+                  <strong>Phone:</strong>+91 , +91  <br>
+                  <strong>Email:</strong> @outlook.com<br>
+                </p> -->
+              </div>
+    
+              <div class="col-lg-3 col-md-6 footer-info">
+                <h3>About Saimasks</h3>
+                <!-- <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p> -->
+                <!-- <div class="social-links mt-3">
+                  <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                  <a href="#" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a>
+                  <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                  <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                  <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                </div> -->
+              </div>
+    
+            </div>
+          </div>
         </div>
-        <!-- Copyright -->
-      
+    
+        <div class="container">
+          <div class="copyright">
+            &copy; Copyright <strong><span>Saimasks</span></strong>. All Rights Reserved
+          </div>
+        </div>
       </footer>
     </div>
 
