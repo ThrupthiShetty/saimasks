@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
       pinCode: [null],
       phoneNumber: [null, Validators.required],
       address: [null, Validators.required],
+      comments: [null],
       orgName: [null],
       quantity: [null, Validators.required],
     })
@@ -62,6 +63,7 @@ export class HomeComponent implements OnInit {
         "phone": this.registerForm.value.phoneNumber || 1213121,
         "samithi": this.registerForm.value.saiSamithi,
         "address": this.registerForm.value.address,
+        "comments": this.registerForm.value.comments,
         "city": this.registerForm.value.city,
         "state": this.registerForm.value.state.name,
         "postalcode": this.registerForm.value.pinCode,

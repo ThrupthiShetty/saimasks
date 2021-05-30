@@ -12,7 +12,7 @@ import { MatPaginator } from '@angular/material/paginator'
 })
 export class RequestsListComponent implements OnInit, AfterViewInit {
 
-  public displayedColumns = ['name', 'email', 'phone', 'qty', 'reqdate', 'address', 'details', 'update'];
+  public displayedColumns = ['name', 'email', 'phone', 'qty', 'reqdate', 'address', 'status', 'details', 'update'];
   public dataSource = new MatTableDataSource<MaskRequest>();
 
   @ViewChild(MatSort,{static: false}) sort: MatSort;
@@ -31,6 +31,7 @@ export class RequestsListComponent implements OnInit, AfterViewInit {
     this.maskRequestService.getData('maskrequests')
       .subscribe(res => {
         this.dataSource.data = res as MaskRequest[];
+        console.log(this.dataSource.data)
       })
   }
 
@@ -57,6 +58,12 @@ export class RequestsListComponent implements OnInit, AfterViewInit {
 
   public redirectToDelete = (id: string) => {
 
+  }
+
+  getDate(currentData) {
+    console.log(currentData)
+    if (!currentData) return ""
+    return new Date(currentData._seconds * 1000)
   }
 
 }
