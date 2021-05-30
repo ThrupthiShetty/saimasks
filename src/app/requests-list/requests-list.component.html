@@ -33,7 +33,7 @@
      
       <ng-container matColumnDef="reqdate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Requested Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.createdAt | date}} </td>
+        <td mat-cell *matCellDef="let element"> {{getDate(element.createdAt)}} </td>
       </ng-container>
      
       <ng-container matColumnDef="address">
