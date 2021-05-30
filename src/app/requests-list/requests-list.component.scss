@@ -1,0 +1,18 @@
+table {
+    margin: 20px;
+    padding: 5%;
+    width: 100%;
+    height: inherit;
+  }
+
+.search-container {
+  margin: 20px;
+}
+
+.search-container > * {
+  width: 30%;
+}
+
+.table-container {
+  margin: 20px;
+}

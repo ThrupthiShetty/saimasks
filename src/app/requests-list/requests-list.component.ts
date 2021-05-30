@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MaskRequest } from '../../app/_interface/maskrequest.model';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator'
+import { ViewRequestComponent } from '../view-request/view-request.component';
+import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-requests-list',
@@ -12,13 +14,13 @@ import { MatPaginator } from '@angular/material/paginator'
 })
 export class RequestsListComponent implements OnInit, AfterViewInit {
 
-  public displayedColumns = ['name', 'email', 'phone', 'qty', 'reqdate', 'address', 'status', 'details', 'update'];
+  public displayedColumns = ['name', 'email', 'qty', 'reqdate', 'status', 'details'];
   public dataSource = new MatTableDataSource<MaskRequest>();
 
   @ViewChild(MatSort,{static: false}) sort: MatSort;
   @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
 
-  constructor(private maskRequestService: MasksRequetsService) { }
+  constructor(private maskRequestService: MasksRequetsService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getAllMaskRequests();
@@ -61,9 +63,16 @@ export class RequestsListComponent implements OnInit, AfterViewInit {
   }
 
   getDate(currentData) {
-    console.log(currentData)
     if (!currentData) return ""
     return new Date(currentData._seconds * 1000)
+  }
+
+  openDialog(details) {
+    const dialogConfig = new MatDialogConfig();
+    console.log(details)
+    this.dialog.open(ViewRequestComponent, {
+      data: details
+    });
   }
 
 }

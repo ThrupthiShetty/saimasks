@@ -11,13 +11,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { RequestsListComponent } from './requests-list/requests-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AboutComponent } from './about/about.component';
+import { ViewRequestComponent } from './view-request/view-request.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RequestsListComponent,
-    DashboardComponent
+    DashboardComponent,
+    AboutComponent,
+    ViewRequestComponent,
+    ViewRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +34,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ViewRequestComponent]
+
 })
 export class AppModule { }

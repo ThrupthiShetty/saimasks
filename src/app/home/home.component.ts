@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
     this.submitted = false;
     this.registerForm = this.formBuilder.group({
       fullName: [null, [Validators.required]],
+      email: [null, [Validators.required]],
       saiSamithi: [null, [Validators.required]],
       state: [this.state, [Validators.required]],
       city: [null, [Validators.required]],
@@ -59,7 +60,7 @@ export class HomeComponent implements OnInit {
       this.showProgress = true;
       const newMaskRequestBody = {
         "name": this.registerForm.value.fullName,
-        "email": this.registerForm.value.city,
+        "email": this.registerForm.value.email,
         "phone": this.registerForm.value.phoneNumber || 1213121,
         "samithi": this.registerForm.value.saiSamithi,
         "address": this.registerForm.value.address,
