@@ -13,6 +13,7 @@ import { RequestsListComponent } from './requests-list/requests-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
 import { ViewRequestComponent } from './view-request/view-request.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ViewRequestComponent } from './view-request/view-request.component';
     DashboardComponent,
     AboutComponent,
     ViewRequestComponent,
-    ViewRequestComponent
+    ViewRequestComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,13 @@
 ::ng-deep .mat-dialog-container {
     width: 500px;
 }
+
+.dialog-header {
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    padding: 10px;
+    color: #ffffff;
+}
+
+.container .row {
+    padding: 5px;
+}
