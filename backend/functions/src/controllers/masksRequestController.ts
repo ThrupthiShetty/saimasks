@@ -28,22 +28,25 @@ type Request = {
 
 const addEntry = async (req: Request, res: Response) => {
 
-    console.log(`addEntry request is `,JSON.stringify(req.body));
+    console.log(`addEntry request is `, JSON.stringify(req.body));
     const { name, email, phone, samithi, address, city, state, postalcode, quantity } = req.body;
     try {
-        const newMaskRequest = db.collection("maskrequests").doc();
+
 
 
 
         if (!req.params.maskRequestId) {
-           req.params.maskRequestId = uuidv4();
+            req.params.maskRequestId = uuidv4();
         }
 
         console.log('Your maskRequist ID is: ' + req.params.maskRequestId);
         const maskRequestObject = {
-            id: req.params.maskRequestId,
-            name, email, phone, samithi, address, city, state, postalcode, quantity, status: "new"
+
+            name, email, phone, samithi, address, city, state, postalcode, quantity, status: "new",
+            createdAt: firestore.FieldValue.serverTimestamp()
         };
+
+        const newMaskRequest = db.collection("maskrequests").doc(req.params.maskRequestId);
         await newMaskRequest.set(maskRequestObject);
 
         res.status(200).send({
@@ -57,6 +60,7 @@ const addEntry = async (req: Request, res: Response) => {
 }
 
 const getAllEntries = async (req: Request, res: Response) => {
+    console.log(`getAllEntries requested`)
     try {
         const allEntries: MaskRequestType[] = [];
         const querySnapshot = await db.collection("maskrequests").get();
@@ -65,7 +69,31 @@ const getAllEntries = async (req: Request, res: Response) => {
     } catch (error) { return res.status(500).json(error.message); }
 }
 
+const getEntry = async (req: Request, res: Response) => {
+    console.log(`getEntry requested`)
+    try {
+
+
+        console.log(`maskRequestId ${req.params.maskRequestId}`)
+        const entry = db.collection("maskrequests").doc(req.params.maskRequestId);;
+        const currentData = (await entry.get()).data() || {};
+
+        if (currentData.createdAt) {
+
+            console.log("converting createdAt ")
+            currentData.createdAt = new Date(currentData.createdAt._seconds * 1000)
+
+            console.log(currentData.createdAt)
+        }else {
+
+            console.log("currentData.createdAt does not exist  ",currentData)
+        }
+        return res.status(200).json(currentData);
+    } catch (error) { return res.status(500).json(error.message); }
+}
+
 const updateEntry = async (req: Request, res: Response) => {
+    console.log(`updateEntry requested`)
     const { body: { name, email, phone, samithi, address, city, state, postalcode, quantity, status }, params: { maskRequestId } } = req;
 
     try {
@@ -83,7 +111,7 @@ const updateEntry = async (req: Request, res: Response) => {
             postalcode: postalcode || currentData.postalcode,
             quantity: quantity || currentData.qunatity,
             status: status || currentData.status,
-            createdAt: firestore.FieldValue.serverTimestamp(),
+
             updatedAt: firestore.FieldValue.serverTimestamp()
 
         };
@@ -102,6 +130,7 @@ const updateEntry = async (req: Request, res: Response) => {
         });
     }
     catch (error) { return res.status(500).json(error.message); }
+
 }
 
 const deleteEntry = async (req: Request, res: Response) => {
@@ -125,4 +154,4 @@ const deleteEntry = async (req: Request, res: Response) => {
     catch (error) { return res.status(500).json(error.message); }
 }
 
-export { addEntry, getAllEntries, updateEntry, deleteEntry }
+export { addEntry, getEntry, getAllEntries, updateEntry, deleteEntry }

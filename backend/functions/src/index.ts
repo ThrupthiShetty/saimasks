@@ -1,7 +1,7 @@
 import * as functions from "firebase-functions";
 import * as express from "express";
 import * as cors from "cors";
-import { addEntry, deleteEntry, getAllEntries, updateEntry } from "./controllers/masksRequestController";
+import { addEntry, deleteEntry, getAllEntries, getEntry, updateEntry } from "./controllers/masksRequestController";
 
 const app = express();
 
@@ -38,7 +38,8 @@ let demoLogger = (req: any, res: any, next: any) => {
 app.use(demoLogger);
 app.get("/", (req, res) => res.status(200).send("Hey there!..I am up for sure :)"));
 app.post("/maskrequests", addEntry);
+app.get('/maskrequest/:maskRequestId', getEntry)
 app.get('/maskrequests', getAllEntries)
-app.patch('/maskrequests/:entryId', updateEntry)
-app.delete('/maskrequests/:entryId', deleteEntry)
+app.patch('/maskrequests/:maskRequestId', updateEntry)
+app.delete('/maskrequests/:maskRequestId', deleteEntry)
 exports.maskapp = functions.https.onRequest(app);
