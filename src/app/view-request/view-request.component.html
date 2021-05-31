@@ -12,7 +12,7 @@
         <mat-divider></mat-divider>
         <div class="row">
             <div class="col">
-                email:
+                Email:
             </div>
             <div class="col">
                 {{data.email}}
@@ -21,7 +21,7 @@
         <mat-divider></mat-divider>
         <div class="row">
             <div class="col">
-                phone:
+                Phone:
             </div>
             <div class="col">
                 {{data.phone}}
@@ -30,7 +30,7 @@
         <mat-divider></mat-divider>
         <div class="row">
             <div class="col">
-                samithi:
+                Samithi:
             </div>
             <div class="col">
                 {{data.samithi}}
@@ -39,7 +39,7 @@
         <mat-divider></mat-divider>
         <div class="row">
             <div class="col">
-                address:
+                Address:
             </div>
             <div class="col">
                 {{data.address}}
@@ -48,7 +48,7 @@
         <mat-divider></mat-divider>
         <div class="row">
             <div class="col">
-                city:
+                City:
             </div>
             <div class="col">
                 {{data.city}}
@@ -57,7 +57,7 @@
         <mat-divider></mat-divider>
         <div class="row">
             <div class="col">
-                state:
+                State:
             </div>
             <div class="col">
                 {{data.state}}
@@ -66,7 +66,7 @@
         <mat-divider></mat-divider>
         <div class="row">
             <div class="col">
-                quantity:
+                Quantity:
             </div>
             <div class="col">
                 {{data.quantity}}
@@ -75,11 +75,68 @@
         <mat-divider></mat-divider>
         <div class="row">
             <div class="col">
-                comments:
+                Comments:
             </div>
             <div class="col">
                 {{data.comments}}
             </div>
         </div>
+        <mat-divider></mat-divider>
+
     </div>
+    <br>
+    <div *ngIf="data.shipping">
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Shipping Details
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+          
+              <div class="container">
+                <div class="row">
+                    <div class="col">
+                        Docket Number:
+                    </div>
+                    <div class="col">
+                        {{data.shipping.docketnumber}}
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row">
+                    <div class="col">
+                        Status:
+                    </div>
+                    <div class="col">
+                        {{data.shipping.status}}
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row" *ngIf="data.shipping.courier">
+                    <div class="col">
+                        Courier Contact:
+                    </div>
+                    <div class="col">
+                        {{data.shipping.courier.contact}}
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row" *ngIf="data.shipping.courier">
+                    <div class="col">
+                        Company:
+                    </div>
+                    <div class="col">
+                        {{data.shipping.courier.company}}
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+            </div>
+          
+            </mat-expansion-panel>
+        </mat-accordion>
+        
+    </div>
+
 </div>

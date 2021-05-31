@@ -52,11 +52,11 @@
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="openDialog(element)">
-              <mat-icon>edit</mat-icon>
+              <mat-icon>view_list</mat-icon>
               <span>View</span>
             </button>
-            <button mat-menu-item (click)="redirectToUpdate(element.id)">
-              <mat-icon>system_update</mat-icon>
+            <button mat-menu-item (click)="editDetails(element.id)">
+              <mat-icon>edit</mat-icon>
               <span>Update</span>
             </button>
           </mat-menu>

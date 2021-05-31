@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as states from '../resources/states.json';
 import { MasksRequetsService } from '../shared/maskrequests.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface State {
@@ -22,9 +22,11 @@ export class HomeComponent implements OnInit {
   state: any;
   submitted: boolean = false;
   showProgress: boolean = false;
+  requestId: string;
   constructor(private formBuilder: FormBuilder,
     private maskRequestService: MasksRequetsService,
     private router: Router,
+    private route: ActivatedRoute,
     private _snackBar: MatSnackBar) {
     this.title = 'Angular Form Validation Tutorial';
     this.states = (states as any).default;
@@ -33,7 +35,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.requestId = this.route.snapshot.paramMap.get('id')
+    //console.log("id is ", this.requestId)
     this.submitted = false;
     this.registerForm = this.formBuilder.group({
       fullName: [null, [Validators.required]],

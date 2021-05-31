@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator'
 import { ViewRequestComponent } from '../view-request/view-request.component';
 import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-requests-list',
@@ -20,7 +21,7 @@ export class RequestsListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort,{static: false}) sort: MatSort;
   @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
 
-  constructor(private maskRequestService: MasksRequetsService, public dialog: MatDialog) { }
+  constructor(private maskRequestService: MasksRequetsService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     this.getAllMaskRequests();
@@ -62,6 +63,10 @@ export class RequestsListComponent implements OnInit, AfterViewInit {
 
   }
 
+  public editDetails = (id: string) => {
+   // this.router.navigate(['/home', {id: id}])
+  }
+
   getDate(currentData) {
     if (!currentData) return ""
     return new Date(currentData._seconds * 1000)
@@ -69,7 +74,6 @@ export class RequestsListComponent implements OnInit, AfterViewInit {
 
   openDialog(details) {
     const dialogConfig = new MatDialogConfig();
-    console.log(details)
     this.dialog.open(ViewRequestComponent, {
       data: details
     });
