@@ -17,8 +17,24 @@ type MaskRequestType = {
     "postalcode": string,
     "quantity": Number,
     "status": string,
-    createdAt: Date,
-    updatedAt: Date
+    "comments": string,
+    "createdAt": Date,
+    "updatedAt": Date
+}
+
+type ShipingRequestType = {
+
+
+    "docketNumber": string,
+    "shipDate": Date,
+    "courier": {
+        "name": string,
+        "company": string,
+        "contact": Number,
+        "email": string,
+    },
+    "status": string
+
 }
 
 type Request = {
@@ -26,10 +42,15 @@ type Request = {
     params: { maskRequestId: string }
 };
 
+type ShippingRequest = {
+    body: ShipingRequestType,
+    params: { maskRequestId: string }
+}
+
 const addEntry = async (req: Request, res: Response) => {
 
     console.log(`addEntry request is `, JSON.stringify(req.body));
-    const { name, email, phone, samithi, address, city, state, postalcode, quantity } = req.body;
+    const { name, email, phone, samithi, address, city, state, postalcode, quantity, comments } = req.body;
     try {
 
 
@@ -42,7 +63,7 @@ const addEntry = async (req: Request, res: Response) => {
         console.log('Your maskRequist ID is: ' + req.params.maskRequestId);
         const maskRequestObject = {
 
-            name, email, phone, samithi, address, city, state, postalcode, quantity, status: "new",
+            name, email, phone, samithi, address, city, state, postalcode, quantity, comments, status: "new",
             createdAt: firestore.FieldValue.serverTimestamp()
         };
 
@@ -64,7 +85,13 @@ const getAllEntries = async (req: Request, res: Response) => {
     try {
         const allEntries: MaskRequestType[] = [];
         const querySnapshot = await db.collection("maskrequests").get();
-        querySnapshot.forEach((doc: any) => allEntries.push(doc.data()));
+        querySnapshot.forEach((doc: any) => {
+
+            let nextMaskRequest = doc.data();
+            nextMaskRequest.id = doc.id;
+            allEntries.push(nextMaskRequest);
+
+        });
         return res.status(200).json(allEntries);
     } catch (error) { return res.status(500).json(error.message); }
 }
@@ -76,42 +103,54 @@ const getEntry = async (req: Request, res: Response) => {
 
         console.log(`maskRequestId ${req.params.maskRequestId}`)
         const entry = db.collection("maskrequests").doc(req.params.maskRequestId);;
-        const currentData = (await entry.get()).data() || {};
 
-        if (currentData.createdAt) {
+        const docData = await entry.get();
+        let currentData: any = {}
+        if (docData) {
+            currentData = await docData.data();
+            currentData.id = docData.id;
 
-            console.log("converting createdAt ")
-            currentData.createdAt = new Date(currentData.createdAt._seconds * 1000)
+            if (currentData.createdAt) {
 
-            console.log(currentData.createdAt)
-        }else {
+                console.log("converting createdAt ")
+                currentData.createdAt = new Date(currentData.createdAt._seconds * 1000)
 
-            console.log("currentData.createdAt does not exist  ",currentData)
+                console.log(currentData.createdAt)
+            } else {
+
+                console.log("currentData.createdAt does not exist  ", currentData)
+            }
+
+        } else {
+
+            console.log(`doc not found of the maskrequest id : ${req.params.maskRequestId}`)
+
         }
+
         return res.status(200).json(currentData);
     } catch (error) { return res.status(500).json(error.message); }
 }
 
-const updateEntry = async (req: Request, res: Response) => {
+const updateEntry = async (req: ShippingRequest, res: Response) => {
     console.log(`updateEntry requested`)
-    const { body: { name, email, phone, samithi, address, city, state, postalcode, quantity, status }, params: { maskRequestId } } = req;
+    //const { body: { docketNumber, shipDate } } = req;
 
     try {
-        const entry = db.collection("maskrequests").doc(maskRequestId);
+        const entry = db.collection("maskrequests").doc(req.params.maskRequestId);
         const currentData = (await entry.get()).data() || {};
 
         const maskRequestObject = {
-            name: name || currentData.title,
-            email: email || currentData.text,
-            phone: phone || currentData.phone,
-            samithi: samithi || currentData.samithi,
-            address: address || currentData.address,
-            city: city || currentData.city,
-            state: state || currentData.state,
-            postalcode: postalcode || currentData.postalcode,
-            quantity: quantity || currentData.qunatity,
-            status: status || currentData.status,
-
+            name: currentData.title,
+            email: currentData.text,
+            phone: currentData.phone,
+            samithi: currentData.samithi,
+            address: currentData.address,
+            city: currentData.city,
+            state: currentData.state,
+            postalcode: currentData.postalcode,
+            quantity: currentData.qunatity,
+            status: currentData.status,
+            comments: currentData.comments,
             updatedAt: firestore.FieldValue.serverTimestamp()
 
         };
@@ -154,4 +193,17 @@ const deleteEntry = async (req: Request, res: Response) => {
     catch (error) { return res.status(500).json(error.message); }
 }
 
-export { addEntry, getEntry, getAllEntries, updateEntry, deleteEntry }
+
+const shippingProvider = async (req: ShippingRequest, res: Response) => {
+
+    console.log(`updateEntry requested`)
+  //  const { body: { name, email, phone, samithi, address, city, state, postalcode, quantity, status, comments }, params: { maskRequestId } } = req;
+
+    try {
+
+
+        return res.json({message:"impl no ready"});
+    } catch (error) { return res.status(500).json(error.message); }
+}
+
+export { addEntry, getEntry, getAllEntries, updateEntry, deleteEntry ,shippingProvider}
