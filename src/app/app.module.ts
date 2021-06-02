@@ -14,7 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
 import { ViewRequestComponent } from './view-request/view-request.component';
 import { FooterComponent } from './footer/footer.component';
-import { RecaptchaModule } from 'ng-recaptcha';
+//import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     MatSidenavModule,
     MaterialModule,
     HttpClientModule,
-    RecaptchaModule
+  //  RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent],

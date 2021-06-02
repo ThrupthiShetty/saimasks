@@ -15,8 +15,10 @@ import { Router } from '@angular/router';
 })
 export class RequestsListComponent implements OnInit, AfterViewInit {
 
-  public displayedColumns = ['name', 'email', 'qty', 'reqdate', 'status', 'details'];
+  public displayedColumns = ['id','name',  'qty', 'reqdate', 'status'];
   public dataSource = new MatTableDataSource<MaskRequest>();
+
+  adminuser:boolean = false;
 
   @ViewChild(MatSort,{static: false}) sort: MatSort;
   @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
@@ -73,6 +75,7 @@ export class RequestsListComponent implements OnInit, AfterViewInit {
   }
 
   openDialog(details) {
+    details.soucecomp = "list"
     const dialogConfig = new MatDialogConfig();
     this.dialog.open(ViewRequestComponent, {
       data: details
