@@ -10,12 +10,22 @@ import { MatSidenavModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { RequestsListComponent } from './requests-list/requests-list.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AboutComponent } from './about/about.component';
+import { ViewRequestComponent } from './view-request/view-request.component';
+import { FooterComponent } from './footer/footer.component';
+//import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RequestsListComponent
+    RequestsListComponent,
+    DashboardComponent,
+    AboutComponent,
+    ViewRequestComponent,
+    ViewRequestComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +34,12 @@ import { RequestsListComponent } from './requests-list/requests-list.component';
     ReactiveFormsModule,
     MatSidenavModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+  //  RecaptchaModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ViewRequestComponent]
+
 })
 export class AppModule { }

@@ -11,6 +11,9 @@ admin.initializeApp({
 });
 
 
+
+admin.firestore().settings({ignoreUndefinedProperties:true});
+
 console.log(`firebase initialized for prpject ${functions.config().project.id}`);
 const db = admin.firestore();
 export { admin, db };
