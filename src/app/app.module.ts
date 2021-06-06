@@ -11,13 +11,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { RequestsListComponent } from './requests-list/requests-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AboutComponent } from './about/about.component';
+import { ViewRequestComponent } from './view-request/view-request.component';
+import { FooterComponent } from './footer/footer.component';
+//import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RequestsListComponent,
-    DashboardComponent
+    DashboardComponent,
+    AboutComponent,
+    ViewRequestComponent,
+    ViewRequestComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -26,9 +34,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     MatSidenavModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+  //  RecaptchaModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ViewRequestComponent]
+
 })
 export class AppModule { }
