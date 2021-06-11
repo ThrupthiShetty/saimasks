@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator'
 import { ViewRequestComponent } from '../view-request/view-request.component';
 import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ContributeRequestComponent } from '../contribute-request/contribute-request.component';
 
 @Component({
   selector: 'app-requests-list',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class RequestsListComponent implements OnInit, AfterViewInit {
 
-  public displayedColumns = ['id','name',  'qty', 'reqdate', 'status'];
+  public displayedColumns = ['id','name',  'qty', 'reqdate', 'status', 'contribute'];
   public dataSource = new MatTableDataSource<MaskRequest>();
 
   adminuser:boolean = false;
@@ -80,6 +81,12 @@ export class RequestsListComponent implements OnInit, AfterViewInit {
     this.dialog.open(ViewRequestComponent, {
       data: details
     });
+  }
+
+  openDialogContribute(id) {
+    this.dialog.open(ContributeRequestComponent, {
+      data: id
+    })
   }
 
 }
