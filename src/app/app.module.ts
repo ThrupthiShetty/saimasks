@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
 import { ViewRequestComponent } from './view-request/view-request.component';
 import { FooterComponent } from './footer/footer.component';
+import { ContributeRequestComponent } from './contribute-request/contribute-request.component';
 //import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
@@ -24,8 +25,8 @@ import { FooterComponent } from './footer/footer.component';
     DashboardComponent,
     AboutComponent,
     ViewRequestComponent,
-    ViewRequestComponent,
-    FooterComponent
+    ContributeRequestComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,7 @@ import { FooterComponent } from './footer/footer.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ViewRequestComponent]
+  entryComponents: [ViewRequestComponent, ContributeRequestComponent]
 
 })
 export class AppModule { }
