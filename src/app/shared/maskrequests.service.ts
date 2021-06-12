@@ -17,6 +17,11 @@ export class MasksRequetsService {
   public create = (route: string, body) => {
     return this.http.post(this.createCompleteRoute("/maskapp/"+route, environment.maskRequestEP), body, this.generateHeaders());
   }
+
+  public contribute = (route: string, body) => {
+    return this.http.post(this.createCompleteRoute("/maskapp/"+route, environment.maskRequestEP), body, this.generateHeaders());
+  }
+ 
  
   public update = (route: string, body) => {
     return this.http.put(this.createCompleteRoute(route, environment.urlAddress), body, this.generateHeaders());

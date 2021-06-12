@@ -9,6 +9,9 @@ import * as fs from 'fs';
 
 const MASK_REQUESTS_COLLECTION = "maskrequests";
 const TEST_MASK_REQUESTS_COLLECTION = "testmaskrequests";
+const CONTRIBUTER_COLLECTION = "contributoins";
+
+const TEST_CONTRIBUTER_COLLECTION = "testcontributoins";
 
 type MaskRequestType = {
     "id": string,
@@ -44,12 +47,29 @@ type ShipingRequestType = {
 
 }
 
-type Request = {
+type ContributeRequestType = {
+
+
+    "name": string,
+    "email": string,
+    "phoneNumber": string,
+    "status": string,
+    "comments": string
+
+}
+
+type MaskRequest = {
     body: MaskRequestType,
     params: { maskRequestId: string },
     headers: any
 };
 
+
+type Request = {
+    body?: any,
+    params: { maskRequestId: string },
+    headers: any
+};
 type ShippingRequest = {
     body: ShipingRequestType,
     params: { maskRequestId: string },
@@ -57,7 +77,15 @@ type ShippingRequest = {
 
 }
 
-const addEntry = async (req: Request, res: Response) => {
+
+type ContributeRequest = {
+    body: ContributeRequestType,
+    params: { maskRequestId: string },
+    headers: any
+
+}
+
+const addEntry = async (req: MaskRequest, res: Response) => {
 
     console.log(`addEntry request is `, JSON.stringify(req.body));
     //console.log(`headers ${req.headers}`)
@@ -74,7 +102,7 @@ const addEntry = async (req: Request, res: Response) => {
             createdAt: firestore.FieldValue.serverTimestamp()
         };
 
-        const dbcollection =  ((req.headers['env'] && req.headers['env'] === 'testenv')) ? db.collection(TEST_MASK_REQUESTS_COLLECTION) : db.collection(MASK_REQUESTS_COLLECTION);
+        const dbcollection = ((req.headers['env'] && req.headers['env'] === 'testenv')) ? db.collection(TEST_MASK_REQUESTS_COLLECTION) : db.collection(MASK_REQUESTS_COLLECTION);
         const newMaskRequest = dbcollection.doc(req.params.maskRequestId);
         await newMaskRequest.set(maskRequestObject);
 
@@ -96,8 +124,8 @@ const getAllEntries = async (req: Request, res: Response) => {
     try {
         const allEntries: MaskRequestType[] = [];
 
-        const dbcollection =  ((req.headers['env'] && req.headers['env'] === 'testenv')) ? db.collection(TEST_MASK_REQUESTS_COLLECTION) : db.collection(MASK_REQUESTS_COLLECTION);
-      
+        const dbcollection = ((req.headers['env'] && req.headers['env'] === 'testenv')) ? db.collection(TEST_MASK_REQUESTS_COLLECTION) : db.collection(MASK_REQUESTS_COLLECTION);
+
         const querySnapshot = await dbcollection.get();
         querySnapshot.forEach((doc: any) => {
 
@@ -126,11 +154,11 @@ const getEntry = async (req: Request, res: Response) => {
     //console.log(req.headers)
     try {
 
-       
+
         console.log(`maskRequestId ${req.params.maskRequestId}`)
 
-        const dbcollection =  ((req.headers['env'] && req.headers['env'] === 'testenv')) ? db.collection(TEST_MASK_REQUESTS_COLLECTION) : db.collection(MASK_REQUESTS_COLLECTION);
-      
+        const dbcollection = ((req.headers['env'] && req.headers['env'] === 'testenv')) ? db.collection(TEST_MASK_REQUESTS_COLLECTION) : db.collection(MASK_REQUESTS_COLLECTION);
+
         const entry = await dbcollection.doc(req.params.maskRequestId);;
         //  console.log("i am here")
         const docData = await entry.get();
@@ -166,14 +194,56 @@ const getEntry = async (req: Request, res: Response) => {
     } catch (error) { return res.status(500).json(error.message); }
 }
 
+const contributeEntry = async (req: ContributeRequest, res: Response) => {
+ //   console.log(`contributeEntry requested`)
+    //const { body: { docketNumber, shipDate } } = req;
+
+    try {
+
+
+
+        const contributeRequestId = uuidv4();
+
+        console.log('Your contributeRequestId ID is: ' + contributeRequestId);
+
+        const contribdbcollection = ((req.headers['env'] && req.headers['env'] === 'testenv')) ? 
+        db.collection(TEST_MASK_REQUESTS_COLLECTION)
+        .doc(req.params.maskRequestId)
+        .collection(TEST_CONTRIBUTER_COLLECTION) 
+        : db.collection(MASK_REQUESTS_COLLECTION)
+        .doc(req.params.maskRequestId)
+        .collection(CONTRIBUTER_COLLECTION);
+
+        const newContributeRequest = {
+           name: req.body.name,
+           email: req.body.email,
+           phoneNumber : req.body.phoneNumber,
+           comments : req.body.comments,
+           createdAt: firestore.FieldValue.serverTimestamp()
+        }
+
+        const newContributeRequestDoc = contribdbcollection.doc(contributeRequestId);
+        await newContributeRequestDoc.set(newContributeRequest).catch(error => {
+            return res.status(400).json({
+                status: "error",
+                message: error.message
+            });
+        });
+
+       return await getEntry(req, res);
+    }
+    catch (error) { return res.status(500).json(error.message); }
+
+}
+
 const updateEntry = async (req: ShippingRequest, res: Response) => {
     console.log(`updateEntry requested`)
     //const { body: { docketNumber, shipDate } } = req;
 
     try {
 
-        const dbcollection =  ((req.headers['env'] && req.headers['env'] === 'testenv')) ? db.collection(TEST_MASK_REQUESTS_COLLECTION) : db.collection(MASK_REQUESTS_COLLECTION);
-      
+        const dbcollection = ((req.headers['env'] && req.headers['env'] === 'testenv')) ? db.collection(TEST_MASK_REQUESTS_COLLECTION) : db.collection(MASK_REQUESTS_COLLECTION);
+
         const entry = dbcollection.doc(req.params.maskRequestId);
         const currentData = (await entry.get()).data() || {};
 
@@ -215,8 +285,8 @@ const deleteEntry = async (req: Request, res: Response) => {
 
     try {
 
-       // const dbcollection =  ((req.headers['env'] && req.headers['env'] === 'testenv')) ? db.collection(TEST_MASK_REQUESTS_COLLECTION) : db.collection(MASK_REQUESTS_COLLECTION);
-      
+        // const dbcollection =  ((req.headers['env'] && req.headers['env'] === 'testenv')) ? db.collection(TEST_MASK_REQUESTS_COLLECTION) : db.collection(MASK_REQUESTS_COLLECTION);
+
         const entry = db.collection("maskrequests-backup").doc(maskRequestId);
 
         await entry.delete().catch(error => {
@@ -280,7 +350,7 @@ const backUpper = async (req: Request, res: Response) => {
 
 }
 
-export { addEntry, getEntry, getAllEntries, updateEntry, deleteEntry, shippingProvider, backUpper }
+export { addEntry, getEntry, getAllEntries, updateEntry, deleteEntry, shippingProvider, backUpper, contributeEntry }
 
 // async function mapDisplay(nextMaskRequest: any, id: any, arg2: string) {
 
@@ -297,3 +367,4 @@ export { addEntry, getEntry, getAllEntries, updateEntry, deleteEntry, shippingPr
 //     } catch (error) { return "error"; }
 
 // }
+

@@ -1,8 +1,8 @@
 <div style="padding: 5px;">
-    <h1 mat-dialog-title class="dialog-header" >Contribute Request</h1>
+    <h1 mat-dialog-title class="dialog-header" >Contribution Interest</h1>
 
     <div class="container" *ngIf="submitted ==true">
-        <h1 mat-dialog-title >Request Submitted. Thank you.</h1>
+        <h1 mat-dialog-title > Thank you for your support.</h1>
         <!-- <h3>Hello   {{data.name}}, <br>
 
             Thank you for logging your request for COVID-19 masks for the community you are serving. We truly appreciate your service. We will look out for volunteers who can fulfill your request and update you.
@@ -39,6 +39,14 @@
                         <mat-label> Phone number
                         </mat-label>
                         <input matInput formControlName="phoneNumber" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field class="form-field" appearance="fill">
+                        <mat-label> Contributions
+                        </mat-label>
+                        <textarea matInput formControlName="comments"
+                        matTooltip="Please enter the details on how you would like to contribute for this requirement."></textarea>
                         </mat-form-field>
                     </div>
             </div>

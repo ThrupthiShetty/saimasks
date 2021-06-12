@@ -33,6 +33,7 @@ export class ContributeRequestComponent implements OnInit {
       fullName: [null, [Validators.required]],
       email: [null, [Validators.required]],
       phoneNumber: [null, Validators.required],
+      comments: [null, Validators.required]
     })
 
   }
@@ -47,16 +48,18 @@ export class ContributeRequestComponent implements OnInit {
         "id": this.id,
         "name": this.contributeForm.value.fullName,
         "email": this.contributeForm.value.email,
-        "phone": this.contributeForm.value.phoneNumber || 1213121,
+        "phoneNumber": this.contributeForm.value.phoneNumber ,
+        "comments"  : this.contributeForm.value.comments
       }
       console.log(contributeMaskRequestBody);
-      // this.maskRequestService.create('maskrequests', contributeMaskRequestBody)
-      //   .subscribe(res => {
-      //     // this.dataSource.data = res as MaskRequest[];
-      //     console.log("contribution request stored in the db.", res);
-      //   //  this._snackBar.open("Your contribution details has been successfully submitted", "Success");
-      //     this.dialogRef.close();
-      //   })
+      this.maskRequestService.create('maskrequests/contribute/'+this.id, contributeMaskRequestBody)
+        .subscribe(res => {
+
+          // this.dataSource.data = res as MaskRequest[];
+          console.log("contribution request stored in the db.", res);
+        //  this._snackBar.open("Your contribution details has been successfully submitted", "Success");
+         // this.dialogRef.close();
+        })
       this.submitted = true;
       this.showProgress = false;
     }
