@@ -1,0 +1,49 @@
+<div style="padding: 5px;">
+    <h1 mat-dialog-title class="dialog-header" >Current Contributions</h1>
+
+    <!-- <div class="container" *ngIf="data.soucecomp =='newreq'">
+        <h1 mat-dialog-title class="dialog-header">Request Submitted. Thank you.</h1>
+        <h3>Hello   {{data.name}}, <br>
+
+            Thank you for logging your request for COVID-19 masks for the community you are serving. We truly appreciate your service. We will look out for volunteers who can fulfill your request and update you.
+            <br> Your Request Id : {{data.id}} <br>
+            Best Regards,</h3>
+    </div> -->
+</div>
+<mat-divider></mat-divider>
+
+<div class="row">
+  <div class="col">
+    <h4>    Name</h4>
+    </div>
+    <div class="col">
+        <h4>    Contribution</h4>
+    </div>  
+</div>
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>
+<div class="container"  *ngFor="let item of data ">
+
+        <div class="row">
+            <div class="col">
+                {{item.name}}
+            </div>
+            <div class="col">
+                {{item.comments}}
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <!-- <div class="row">
+            <div class="col">
+                contribution:
+            </div>
+            <div class="col">
+                {{item.comments}}
+            </div>
+        </div> -->
+        
+        
+        <mat-divider></mat-divider>
+  
+</div>
+

@@ -34,11 +34,22 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
       </ng-container>
+
+      
+      <ng-container matColumnDef="contributions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contributions </th>
+        <!-- <td mat-cell *matCellDef="let element"> {{element.status}} </td> -->
+
+        <td mat-cell *matCellDef="let element"  >
+          <button *ngIf="element.contributions != undefined && element.contributions.length > 0" mat-raised-button color="primary" (click)="openDialogViewContributions(element.contributions)">View</button>
+          <button disabled *ngIf="element.contributions === undefined " mat-raised-button color="#0099CC" >Help Needed</button>
+        </td>
+      </ng-container>
      
      
       <ng-container matColumnDef="reqdate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Requested Date </th>
-        <td mat-cell *matCellDef="let element"> {{getDate(element.createdAt) | date}} </td>
+        <td mat-cell *matCellDef="let element">{{ element.createdAt | date}}  </td>
       </ng-container>
      
       <!-- <ng-container matColumnDef="address">
@@ -87,7 +98,7 @@
           </ng-container> -->
      
           <ng-container matColumnDef="contribute" stickyEnd>
-            <th mat-header-cell *matHeaderCellDef></th>
+            <th mat-header-cell *matHeaderCellDef>Participate</th>
             <td mat-cell *matCellDef="let element">
               <button mat-raised-button color="primary" (click)="openDialogContribute(element.id)">Contribute</button>
             </td>

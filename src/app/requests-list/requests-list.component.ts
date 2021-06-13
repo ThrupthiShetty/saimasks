@@ -8,6 +8,7 @@ import { ViewRequestComponent } from '../view-request/view-request.component';
 import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ContributeRequestComponent } from '../contribute-request/contribute-request.component';
+import { ViewcontributeComponent } from '../viewcontribute/viewcontribute.component';
 
 @Component({
   selector: 'app-requests-list',
@@ -16,7 +17,7 @@ import { ContributeRequestComponent } from '../contribute-request/contribute-req
 })
 export class RequestsListComponent implements OnInit, AfterViewInit {
 
-  public displayedColumns = ['id','name',  'qty', 'reqdate', 'status', 'contribute'];
+  public displayedColumns = ['id','name',  'qty', 'reqdate', 'contributions','contribute'];
   public dataSource = new MatTableDataSource<MaskRequest>();
 
   adminuser:boolean = false;
@@ -86,6 +87,12 @@ export class RequestsListComponent implements OnInit, AfterViewInit {
   openDialogContribute(id) {
     this.dialog.open(ContributeRequestComponent, {
       data: id
+    })
+  }
+
+  openDialogViewContributions(contributions) {
+    this.dialog.open(ViewcontributeComponent, {
+      data: contributions
     })
   }
 

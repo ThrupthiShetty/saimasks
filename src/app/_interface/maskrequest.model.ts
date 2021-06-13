@@ -18,7 +18,8 @@ export interface MaskRequest {
     "postalcode": string,
     "quantity": Number,
     "status" : string,
-    "comments": string
+    "comments": string,
+    "contributions": any
 }
 
 
